@@ -89,9 +89,8 @@ class hsdnet(nn.Module):
         x = self.b2(x)
         x = self.b3(x)
         
-        # GRU processing (treat channels as sequence length)
-        # Input shape: (batch, channels, length) -> (batch, length, channels)
-        x = x.permute(0, 2, 1)
+        # GRU processing
+        # Input shape: (batch, channels, length)
         x, _ = self.gru(x)
         # Take last timestep output
         x = x[:, -1, :]
